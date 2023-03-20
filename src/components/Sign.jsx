@@ -11,7 +11,7 @@ export const Sign = () => {
       {isLoggedIn ? (
         <Button onClick={() => auth.signOut()}>Sign Out</Button>
       ) : (
-        <Button onClick={() => auth.signIn({ force: true })}>Sign In</Button>
+        <Button onClick={() => auth.signIn()}>Sign In</Button>
       )}
     </div>
   );

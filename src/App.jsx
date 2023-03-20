@@ -1,12 +1,9 @@
 import { Container, Typography } from "@mui/material";
 import { RegisterForm } from "./components/RegisterForm";
-import { Auth } from "@polybase/auth";
 import { AuthProvider, PolybaseProvider } from "@polybase/react";
 import { Sign } from "./components/Sign";
 import { CredentialsList } from "./components/CredentialsList";
-import { polybase } from "./services/Polybase";
-
-const auth = new Auth();
+import { auth, polybase } from "./services/polybase";
 
 const App = () => {
   return (

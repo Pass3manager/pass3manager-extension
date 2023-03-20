@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { Stack, TextField } from "@mui/material";
-import { useIsAuthenticated } from "@polybase/react";
-import { createRecord, requestAccount } from "../services/Polybase";
+import { useAuth, useCollection, useIsAuthenticated, usePolybase } from "@polybase/react";
+import {
+  createRecord,
+  getNamespace,
+  requestAccount,
+} from "../services/polybase";
 import * as eth from "@polybase/eth";
+import { POLYBASE_CONSTANTS } from "../constants/polybase";
 
 export const RegisterForm = () => {
   const [url, setUrl] = useState("");
@@ -15,20 +20,29 @@ export const RegisterForm = () => {
     setPassword("");
     setUrl("");
   };
+  const polybase = usePolybase();
+  const { state } = useAuth();
+  const { error } = useCollection(
+    polybase.collection(
+      `${getNamespace(state?.publicKey)}/${
+        POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION
+      }`
+    )
+  );
   const handleOnSubmit = async () => {
     const account = await requestAccount();
     const encryptedPassword = await eth.encrypt(password, account);
     const encryptedUsername = await eth.encrypt(username, account);
-    const encryptedUrl = await eth.encrypt(url, account);
-    createRecord("Credential", [
-      encryptedUrl,
-      encryptedUsername,
-      encryptedPassword,
-    ]);
+    createRecord(
+      `${getNamespace(state.publicKey)}/${
+        POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION
+      }`,
+      [url, encryptedUsername, encryptedPassword]
+    );
     clearTextFields();
   };
 
-  if (isLoggedIn)
+  if (isLoggedIn && !error)
     return (
       <Stack spacing={2}>
         <TextField

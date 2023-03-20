@@ -3,19 +3,33 @@ import {
   usePolybase,
   useCollection,
   useIsAuthenticated,
+  useAuth,
 } from "@polybase/react";
-import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem, useGridApiRef } from "@mui/x-data-grid";
 import SecurityIcon from "@mui/icons-material/Security";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { decryptCredentials, deleteCredential } from "../services/Polybase";
+import {
+  createCredentialSchema,
+  decryptCredentials,
+  deleteCredential,
+  getNamespace,
+} from "../services/polybase";
+import { POLYBASE_CONSTANTS } from "../constants/polybase";
+import { Button, Typography } from "@mui/material";
 
 export const CredentialsList = () => {
   const polybase = usePolybase();
   const [list, setList] = React.useState([]);
-  const { data, error, loading } = useCollection(
-    polybase.collection("Credential")
+  const { state } = useAuth();
+  const { data, error } = useCollection(
+    polybase.collection(
+      `${getNamespace(state?.publicKey)}/${
+        POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION
+      }`
+    )
   );
   const [isLoggedIn] = useIsAuthenticated();
+  const apiRef = useGridApiRef();
 
   React.useEffect(() => {
     if (data?.data) {
@@ -28,15 +42,22 @@ export const CredentialsList = () => {
           };
         })
       );
+    } else {
+      setList([]);
     }
   }, [data]);
 
+  React.useEffect(() => {
+    if (error) {
+      setList([]);
+    }
+  }, [error]);
+
   const decrypt = async (params) => {
-    
-    const { url, username, password } = await decryptCredentials(params.row);
-    params.row.id = url;
-    params.row.username = username;
-    params.row.password = password;
+    const { username, password } = await decryptCredentials(params.row);
+    apiRef.current.updateRows([
+      { id: params.row.id, username: username, password: password },
+    ]);
   };
 
   const columns = [
@@ -50,14 +71,14 @@ export const CredentialsList = () => {
       getActions: (params) => [
         <GridActionsCellItem
           icon={<SecurityIcon />}
-          onClick={() => decrypt(params)}
           label="Decrypt"
+          onClick={() => decrypt(params)}
         />,
 
         <GridActionsCellItem
           icon={<DeleteIcon />}
           label="Delete"
-          onClick={() => deleteCredential(params.row.id)}
+          onClick={() => deleteCredential(state?.publicKey, params.row.id)}
         />,
       ],
     },
@@ -67,11 +88,20 @@ export const CredentialsList = () => {
     <div style={{ height: 400, width: "100%" }}>
       {isLoggedIn && list?.length > 0 && (
         <DataGrid
+          apiRef={apiRef}
           rows={list}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
         />
+      )}
+      {isLoggedIn && error && (
+        <div>
+          <Typography> You do not have a collection yet. </Typography>
+          <Button onClick={() => createCredentialSchema(state?.publicKey)}>
+            Create Collection
+          </Button>
+        </div>
       )}
     </div>
   );
