@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "CRXJS React Vite Example",
+  "name": "Password Manager 3.0",
   "version": "1.0.0",
   "action": { "default_popup": "index.html" }
 }

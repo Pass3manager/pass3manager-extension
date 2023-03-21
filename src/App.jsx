@@ -9,11 +9,10 @@ const App = () => {
   return (
     <PolybaseProvider polybase={polybase}>
       <AuthProvider auth={auth} polybase={polybase}>
-        <Container maxWidth="xs">
+        <Container style={{width:"320px"}}>
+          <br />
+          <br />
           <Sign />
-          <Typography variant="h2">Pass3Manager</Typography>
-          <br />
-          <br />
           <RegisterForm />
           <br />
           <br />
