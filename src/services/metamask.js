@@ -5,7 +5,7 @@ import browserDetect from "browser-detect";
 
 const browser = browserDetect();
 
-export const createMetamaskProvider = async () => {
+export const createMetamaskProvider = () => {
   if (!window.ethereum) {
     const metamaskPort = chrome.runtime.connect(getMetaMaskId());
     const pluginStream = new PortStream(metamaskPort);
