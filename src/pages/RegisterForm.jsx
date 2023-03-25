@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { Stack, TextField } from "@mui/material";
-import {
-  useAuth,
-  useCollection,
-  useIsAuthenticated,
-  usePolybase,
-} from "@polybase/react";
+import { useCollection, usePolybase } from "@polybase/react";
 import {
   createRecord,
   getNamespace,
@@ -14,22 +9,22 @@ import {
 } from "../services/polybase";
 import * as eth from "@polybase/eth";
 import { POLYBASE_CONSTANTS } from "../constants/polybase";
+import { useAuthContext } from "../context/useAuth";
 
 export const RegisterForm = () => {
   const [url, setUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn] = useIsAuthenticated();
+  const { isLoggedIn, user } = useAuthContext();
   const clearTextFields = () => {
     setUsername("");
     setPassword("");
     setUrl("");
   };
   const polybase = usePolybase();
-  const { state } = useAuth();
   const { error } = useCollection(
     polybase.collection(
-      `${getNamespace(state?.publicKey)}/${
+      `${getNamespace(user?.publicKey)}/${
         POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION
       }`
     )
@@ -39,7 +34,7 @@ export const RegisterForm = () => {
     const encryptedPassword = await eth.encrypt(password, account);
     const encryptedUsername = await eth.encrypt(username, account);
     await createRecord(
-      `${getNamespace(state.publicKey)}/${
+      `${getNamespace(user.publicKey)}/${
         POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION
       }`,
       [url, encryptedUsername, encryptedPassword]

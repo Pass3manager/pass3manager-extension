@@ -1,7 +1,7 @@
 import React from "react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { CredentialsList } from "../components/CredentialsList";
-import { RegisterForm } from "../components/RegisterForm";
+import { CredentialsList } from "../pages/CredentialsList";
+import { RegisterForm } from "../pages/RegisterForm";
 import { Credential } from "../pages/Credential";
 import { SelectNetwork } from "../pages/SelectNetwork";
 import { Settings } from "../pages/Settings";
@@ -14,7 +14,7 @@ export const Routes = () => {
       element: <Sign />,
     },
     {
-      path: "/RegisterForm",
+      path: "/register-form",
       element: <RegisterForm />,
     },
     {
@@ -33,7 +33,6 @@ export const Routes = () => {
       path: "/get-credential-data",
       element: <Credential />,
     },
-
   ]);
 
   return <RouterProvider router={router} />;

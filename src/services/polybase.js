@@ -1,17 +1,12 @@
 import { Polybase } from "@polybase/client";
 import * as eth from "@polybase/eth";
 import { POLYBASE_CONSTANTS } from "../constants/polybase";
-import { Auth } from "@polybase/auth";
 import { credentialSchema } from "../schemas/credential";
-
-export const auth = new Auth();
 
 export const polybase = new Polybase({
   signer: async (data) => {
-    return {
-      h: "eth-personal-sign",
-      sig: await auth.ethPersonalSign(data),
-    };
+    const sig = await eth.sign(data, await requestAccount());
+    return { h: "eth-personal-sign", sig };
   },
 });
 
