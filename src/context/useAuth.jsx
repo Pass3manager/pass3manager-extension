@@ -1,4 +1,5 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo } from "react";
+import { useChromeStorageLocal } from "use-chrome-storage";
 
 export const AuthContext = createContext();
 
@@ -34,8 +35,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({
+  const [isLoggedIn, setIsLoggedIn] = useChromeStorageLocal(
+    "isLoggedIn",
+    false
+  );
+
+  const [user, setUser] = useChromeStorageLocal("user", {
     userId: null,
     publicKey: null,
   });
