@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import { Stack, TextField } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useCollection, usePolybase } from "@polybase/react";
 import {
   createRecord,
@@ -11,6 +11,8 @@ import * as eth from "@polybase/eth";
 import { POLYBASE_CONSTANTS } from "../constants/polybase";
 import { useAuthContext } from "../context/useAuth";
 import { Navbar } from "../components/Navbar";
+import { CancelButton } from "../components/CancelButton";
+import { CredentialForm } from "../components/CredentialForm";
 
 export const RegisterForm = () => {
   const [url, setUrl] = useState("");
@@ -47,28 +49,18 @@ export const RegisterForm = () => {
     return (
       <Stack spacing={2} height={500} width={350}>
         <Navbar />
-        <TextField
-          label="URL"
-          variant="outlined"
-          value={url}
-          onChange={(event) => setUrl(event.target.value)}
-        />
-        <TextField
-          label="Username/Email"
-          variant="outlined"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <TextField
-          label="Password"
-          variant="outlined"
-          type={"password"}
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
+        <CredentialForm
+          url={url}
+          username={username}
+          password={password}
+          setUrl={setUrl}
+          setUsername={setUsername}
+          setPassword={setPassword}
         />
         <Button variant="contained" onClick={handleOnSubmit}>
           Save Credentials
         </Button>
+        <CancelButton />
       </Stack>
     );
   else return <React.Fragment />;

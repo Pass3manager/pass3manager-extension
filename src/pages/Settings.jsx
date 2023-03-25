@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Switch, Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
+import { CancelButton } from "../components/CancelButton";
 
 export const Settings = () => {
   return (
@@ -25,6 +26,7 @@ export const Settings = () => {
         <Typography>Enable fields to be auto-filled</Typography>
         <Switch defaultChecked />
       </div>
+      <CancelButton />
     </div>
   );
 };
