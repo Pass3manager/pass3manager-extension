@@ -1,10 +1,12 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { CredentialsList } from "../components/CredentialsList";
 import { RegisterForm } from "../components/RegisterForm";
-import { Sign } from "../components/Sign";
+import { SelectNetwork } from "../pages/SelectNetwork";
+import { Sign } from "../pages/Sign";
 
 export const Routes = () => {
-  const router = createBrowserRouter([
+  const router = createMemoryRouter([
     {
       path: "/",
       element: <Sign />,
@@ -13,6 +15,14 @@ export const Routes = () => {
       path: "/RegisterForm",
       element: <RegisterForm />,
     },
+    {
+      path: "/select-network",
+      element: <SelectNetwork />,
+    },
+    {
+      path: "/credential-list",
+      element: <CredentialsList />,
+    }
   ]);
 
   return <RouterProvider router={router} />;
