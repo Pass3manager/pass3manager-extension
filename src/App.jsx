@@ -15,16 +15,7 @@ const App = () => {
   return (
     <PolybaseProvider polybase={polybase}>
       <AuthProvider auth={auth} polybase={polybase}>
-        <Container maxWidth="xs">
-          <Sign />
-          <Typography variant="h2">Pass3Manager</Typography>
-          <br />
-          <br />
-          <RegisterForm />
-          <br />
-          <br />
-          <CredentialsList />
-        </Container>
+        <Routes />
       </AuthProvider>
     </PolybaseProvider>
   );
