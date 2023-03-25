@@ -1,7 +1,9 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
+  FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
   OutlinedInput,
   TextField,
 } from "@mui/material";
@@ -33,24 +35,28 @@ export const CredentialForm = ({
         value={username}
         onChange={(event) => setUsername(event.target.value)}
       />
-      <OutlinedInput
-        label="Password"
-        variant="outlined"
-        type={showPassword ? "text" : "password"}
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              edge="end"
-            >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        }
-      />
+      <FormControl variant="outlined">
+        <InputLabel htmlFor="out-password">Password</InputLabel>
+        <OutlinedInput
+          id="out-password"
+          label="Password"
+          variant="outlined"
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
     </Fragment>
   );
 };
