@@ -10,6 +10,7 @@ import {
 import * as eth from "@polybase/eth";
 import { POLYBASE_CONSTANTS } from "../constants/polybase";
 import { useAuthContext } from "../context/useAuth";
+import { Navbar } from "../components/Navbar";
 
 export const RegisterForm = () => {
   const [url, setUrl] = useState("");
@@ -44,7 +45,8 @@ export const RegisterForm = () => {
 
   if (isLoggedIn && !error)
     return (
-      <Stack spacing={2}>
+      <Stack spacing={2} height={500} width={350}>
+        <Navbar />
         <TextField
           label="URL"
           variant="outlined"
