@@ -1,24 +1,27 @@
 import { Container } from "@mui/material";
-import { PolybaseProvider } from "@polybase/react";
-import { polybase } from "./services/polybase";
 import { useEffect } from "react";
 import { createMetamaskProvider } from "./services/metamask";
 import { Routes } from "./routes/Routes";
-import { AuthProvider } from "./context/useAuth";
+import { useAuthContext } from "./context/useAuth";
+import { addChangeUrlListener } from "./services/chrome";
 
 const App = () => {
+  const { isLoggedIn, user } = useAuthContext();
+
   useEffect(() => {
     createMetamaskProvider();
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      addChangeUrlListener(user.publicKey);
+    }
+  }, [isLoggedIn]);
+
   return (
-    <PolybaseProvider polybase={polybase}>
-      <AuthProvider>
-        <Container>
-          <Routes />
-        </Container>
-      </AuthProvider>
-    </PolybaseProvider>
+    <Container>
+      <Routes />
+    </Container>
   );
 };
 

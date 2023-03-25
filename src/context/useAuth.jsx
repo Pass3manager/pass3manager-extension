@@ -1,5 +1,4 @@
-import { createContext, useContext, useState } from "react";
-import { Buffer } from "buffer";
+import { createContext, useContext, useMemo, useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -17,16 +16,15 @@ export const AuthProvider = ({ children }) => {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
-      const msg = `0x${Buffer.from("Login", "utf8").toString("hex")}`;
-      const sign = await ethereum.request({
-        method: "personal_sign",
-        params: [msg, accounts[0]],
+      const publicKey = await window.ethereum.request({
+        method: "eth_getEncryptionPublicKey",
+        params: [accounts[0]],
       });
-      if (sign) {
+      if (publicKey) {
         setIsLoggedIn(true);
         setUser({
           userId: accounts[0],
-          publicKey: sign,
+          publicKey: publicKey.toString("hex"),
         });
       } else {
         console.alert("Auth not signed");
@@ -42,11 +40,12 @@ export const AuthProvider = ({ children }) => {
     publicKey: null,
   });
 
+  const authParams = useMemo(
+    () => ({ isLoggedIn, setIsLoggedIn, user, setUser, connectWallet }),
+    [isLoggedIn, setIsLoggedIn, user, setUser, connectWallet]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, user, setUser, connectWallet }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authParams}>{children}</AuthContext.Provider>
   );
 };

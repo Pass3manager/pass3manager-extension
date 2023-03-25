@@ -39,7 +39,7 @@ export const decryptCredentials = async ({ username, password }) => {
 
 export const deleteCredential = async (publicKey, id) => {
   assignSigner();
-  polybase
+  await polybase
     .collection(
       `${getNamespace(publicKey)}/${POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION}`
     )
@@ -61,4 +61,14 @@ export const createCredentialSchema = async (publicKey) => {
   } catch (error) {
     await polybase.applySchema(credentialSchema, `${getNamespace(publicKey)}`);
   }
+};
+
+export const getCredential = async (publicKey, id) => {
+  assignSigner();
+  return await polybase
+    .collection(
+      `${getNamespace(publicKey)}/${POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION}`
+    )
+    .record(id)
+    .get();
 };
