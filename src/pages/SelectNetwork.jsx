@@ -7,33 +7,44 @@ import { useNavigate } from "react-router";
 
 
 export const SelectNetwork = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
-    <div>
-       <Navbar/>
-       <Typography>
-       Select the network where your credentials will be stored
-       </Typography>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width:'350px', height:'500px' }}>
+      <Navbar />
+      <Typography style={{ textAlign: 'center' }}>
+        Selecciona la red donde se almacenarán tus credenciales
+      </Typography>
 
-       <div>
-       <Button aria-label="delete" onClick={()=>{
-        navigate("/credential-list");
-       }}>
-       <img src="../img/polybase.png" alt="Polybase" style={{ height: '40px' }} />
-</Button>
-      
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px 0' }}>
+        <Button aria-label="delete" onClick={() => {
+          navigate("/credential-list");
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src="../img/polybase.png" alt="Polybase" style={{ height: '40px' }} />
+           
+          </div>
+        </Button>
+        <Typography style={{ textAlign: 'center' }}>Decentralized database for self sovereign data</Typography>
+      </div>
 
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px 0' }}>
+      <Button aria-label="delete" onClick={() => {
+          navigate("/credential-list");
+        }}>
+        <img src="../img/gnosis.png" alt="Polybase" style={{ height: '40px' }} />
+        </Button>
+        <Typography style={{ textAlign: 'center' }}>Self sovereign data through smart contracts on-chain, aplly gas-fees</Typography>
+      </div>
 
-       </div>
-       <div>
-       <img src="../img/polybase.png" alt="Polybase" style={{ height: '100px' }} />
-       </div>
-       <div>
-       <img src="../img/polybase.png" alt="Polybase" style={{ height: '100px' }} />
-       </div>
-
-
-
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px 0' }}>
+      <Button aria-label="delete" onClick={() => {
+          navigate("/credential-list");
+        }}>
+        <img src="../img/scroll.png" alt="Polybase" style={{ height: '40px' }} />
+        </Button>
+        <Typography style={{ textAlign: 'center' }}>Self sovereign data through smart contracts on-chain, aplly gas-fees</Typography>
+      </div>
     </div>
+
   )
 }
