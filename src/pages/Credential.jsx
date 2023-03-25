@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
 import { decryptCredentials, deleteCredential } from "../services/polybase";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/useAuth";
 import { CancelButton } from "../components/CancelButton";
 import { CredentialForm } from "../components/CredentialForm";
@@ -13,6 +13,7 @@ export const Credential = () => {
   const { state } = useLocation();
   const { credential } = state;
   const [url, setUrl] = useState("");
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -51,7 +52,10 @@ export const Credential = () => {
       <Button
         variant="outlined"
         color="error"
-        onClick={() => deleteCredential(user.publicKey, credential.id)}
+        onClick={async () => {
+          await deleteCredential(user.publicKey, credential.id);
+          navigate(-1);
+        }}
       >
         DELETE
       </Button>

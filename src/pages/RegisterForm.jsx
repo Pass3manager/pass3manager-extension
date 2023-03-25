@@ -13,12 +13,14 @@ import { useAuthContext } from "../context/useAuth";
 import { Navbar } from "../components/Navbar";
 import { CancelButton } from "../components/CancelButton";
 import { CredentialForm } from "../components/CredentialForm";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterForm = () => {
   const [url, setUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isLoggedIn, user } = useAuthContext();
+  const navigate = useNavigate();
   const clearTextFields = () => {
     setUsername("");
     setPassword("");
@@ -43,6 +45,7 @@ export const RegisterForm = () => {
       [url, encryptedUsername, encryptedPassword]
     );
     clearTextFields();
+    navigate(-1);
   };
 
   if (isLoggedIn && !error)

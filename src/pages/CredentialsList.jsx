@@ -67,13 +67,6 @@ export const CredentialsList = () => {
     }
   }, [error]);
 
-  const decrypt = async (params) => {
-    const { username, password } = await decryptCredentials(params.row);
-    apiRef.current.updateRows([
-      { id: params.row.id, username: username, password: password },
-    ]);
-  };
-
   return (
     <div
       style={{
