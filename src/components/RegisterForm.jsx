@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { Stack, TextField } from "@mui/material";
-import { useAuth, useCollection, useIsAuthenticated, usePolybase } from "@polybase/react";
+import {
+  useAuth,
+  useCollection,
+  useIsAuthenticated,
+  usePolybase,
+} from "@polybase/react";
 import {
   createRecord,
   getNamespace,
@@ -33,7 +38,7 @@ export const RegisterForm = () => {
     const account = await requestAccount();
     const encryptedPassword = await eth.encrypt(password, account);
     const encryptedUsername = await eth.encrypt(username, account);
-    createRecord(
+    await createRecord(
       `${getNamespace(state.publicKey)}/${
         POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION
       }`,

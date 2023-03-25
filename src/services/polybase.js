@@ -15,13 +15,21 @@ export const polybase = new Polybase({
   },
 });
 
+export const assignSigner = () => {
+  polybase.signer(async (data) => {
+    const sig = await eth.sign(data, await requestAccount());
+    return { h: "eth-personal-sign", sig };
+  });
+};
+
 export const requestAccount = async () => {
   const accounts = await eth.requestAccounts();
   return accounts[0];
 };
 
-export const createRecord = (collection, data) => {
-  polybase.collection(collection).create(data);
+export const createRecord = async (collection, data) => {
+  assignSigner();
+  return await polybase.collection(collection).create(data);
 };
 
 export const decryptCredentials = async ({ username, password }) => {
@@ -35,6 +43,7 @@ export const decryptCredentials = async ({ username, password }) => {
 };
 
 export const deleteCredential = async (publicKey, id) => {
+  assignSigner();
   polybase
     .collection(
       `${getNamespace(publicKey)}/${POLYBASE_CONSTANTS.CREDENTIAL_COLLECTION}`
