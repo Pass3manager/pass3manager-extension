@@ -1,10 +1,6 @@
 import * as React from "react";
 import { usePolybase, useCollection } from "@polybase/react";
-import {
-  createCredentialSchema,
-  decryptCredentials,
-  getNamespace,
-} from "../services/polybase";
+import { createCredentialSchema, getNamespace } from "../services/polybase";
 import { POLYBASE_CONSTANTS } from "../constants/polybase";
 import {
   Button,
@@ -34,7 +30,6 @@ export const CredentialsList = () => {
   );
 
   React.useEffect(() => {
-    console.log("data", data);
     if (data?.data) {
       setList(
         data.data.map((e) => {
@@ -50,7 +45,8 @@ export const CredentialsList = () => {
     }
   }, [data]);
 
-  const [createCredentialLoading, setCreateCredentialLoading] = React.useState(false);
+  const [createCredentialLoading, setCreateCredentialLoading] =
+    React.useState(false);
 
   const createSchema = async () => {
     setCreateCredentialLoading(true);
