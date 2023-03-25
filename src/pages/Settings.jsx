@@ -1,18 +1,22 @@
 import * as React from "react";
-import { Switch, Typography } from "@mui/material";
+import { Button, Switch, Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
 import { CancelButton } from "../components/CancelButton";
+import { useAuthContext } from "../context/useAuth";
+import { useNavigate } from "react-router-dom";
+import { Stack } from "@mui/system";
 
 export const Settings = () => {
+  const { setUser, setIsLoggedIn, isLoggedIn } = useAuthContext();
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "350px",
-        height: "500px",
-      }}
-    >
+    <Stack spacing={2} height={500} width={350}>
       <Navbar />
       <Typography style={{ textAlign: "center", fontWeight: "bold" }}>
         Settings
@@ -27,6 +31,20 @@ export const Settings = () => {
         <Switch defaultChecked />
       </div>
       <CancelButton />
-    </div>
+
+      <Button
+        color="error"
+        variant="contained"
+        onClick={() => {
+          setUser({
+            userId: null,
+            publicKey: null,
+          });
+          setIsLoggedIn(false);
+        }}
+      >
+        Logout
+      </Button>
+    </Stack>
   );
 };
