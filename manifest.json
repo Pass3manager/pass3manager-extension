@@ -3,13 +3,13 @@
   "name": "Web3pass",
   "version": "1.0.0",
   "icons": {
-    "16": "img/icon.png",
-    "48": "img/icon.png",
-    "128": "img/icon.png"
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
 
   },
   "web_accessible_resources": [{ 
-    "resources": ["img/polybase.png","img/gnosis.png"],
+    "resources": ["img/polybase.png","img/gnosis.png","img/logoinicial.png"],
     "matches": ["<all_urls>"]
   }],
   "action": { "default_popup": "index.html" },

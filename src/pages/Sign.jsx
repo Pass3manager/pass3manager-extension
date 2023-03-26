@@ -26,17 +26,11 @@ export const Sign = () => {
       
     <Stack spacing={2} height={500} width={350}  alignItems="center" >
           <img
-            src="icon.png"
+            src="../img/logoinicial.png"
             style={{ height: "250px",width:"250px" }}
           />
 
-          <Typography
-            variant="body1"
-            fontSize={"30px"}
-            fontWeight="bold"
-          >
-            Web3Pass
-          </Typography>
+  
           {eth ? (
             <Button
               variant="contained"
@@ -57,7 +51,8 @@ export const Sign = () => {
           <Typography
             variant="body1"
           >
-            Want to know more about Pass3manager, <a href="https://www.bonfire.xyz/web3pass/home">click here</a>
+            Want to know more about Pass3manager,<a href="https://www.bonfire.xyz/web3pass" target="_blank">click here</a>
+       
           </Typography>
           
 
