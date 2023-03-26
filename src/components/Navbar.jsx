@@ -15,7 +15,7 @@ export const Navbar = () => {
         >
           <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
             <img
-              src="../img/icon.png"
+              src="icon.png"
               alt="Web3Pass"
               style={{ height: "45px", width: "auto" }}
             />

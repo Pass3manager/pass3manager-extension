@@ -6,7 +6,12 @@
     "16": "icon.png",
     "48": "icon.png",
     "128": "icon.png"
+
   },
+  "web_accessible_resources": [{ 
+    "resources": ["img/polybase.png","img/gnosis.png"],
+    "matches": ["<all_urls>"]
+  }],
   "action": { "default_popup": "index.html" },
  
 
