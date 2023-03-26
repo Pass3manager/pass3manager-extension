@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useCollection, usePolybase } from "@polybase/react";
 import {
   createRecord,
@@ -52,6 +52,9 @@ export const RegisterForm = () => {
     return (
       <Stack spacing={2} height={500} width={350}>
         <Navbar />
+        <Typography style={{ textAlign: "start", fontWeight: "bold" }}>
+        Register your credential info
+      </Typography>
         <CredentialForm
           url={url}
           username={username}

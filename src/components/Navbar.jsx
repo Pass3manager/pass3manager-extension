@@ -8,7 +8,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   return (
     isLoggedIn && (
-      <div style={{ paddingBottom: "5rem" }}>
+      <div style={{ paddingBottom: "3.5rem" }}>
         <AppBar
           position="fixed"
           style={{ backgroundColor: "white", width: "100%", top: 0 }}
@@ -16,16 +16,17 @@ export const Navbar = () => {
           <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
             <img
               src="../img/icon.png"
-              alt="Logo"
-              style={{ height: "30px", width: "auto" }}
+              alt="Web3Pass"
+              style={{ height: "45px", width: "auto" }}
             />
             <IconButton
               color="primary"
+              
               onClick={() => {
                 navigate("/settings");
               }}
             >
-              <Settings />
+              <Settings style={{fontSize:"40px"}} />
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -33,3 +34,10 @@ export const Navbar = () => {
     )
   );
 };
+
+
+
+
+
+
+  

@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Stack,
   Typography,
 } from "@mui/material";
 import { Navbar } from "../components/Navbar";
@@ -64,14 +65,7 @@ export const CredentialsList = () => {
   }, [error]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "350px",
-        height: "500px",
-      }}
-    >
+    <Stack spacing={2} height={500} width={350}>
       <Navbar />
       {isLoggedIn && (
         <div>
@@ -79,14 +73,14 @@ export const CredentialsList = () => {
             container
             direction="row"
             justifyContent="flex-end"
-            alignItems="center"
+        
           >
-            <Grid item xs={8}>
+            <Grid item xs={11}>
               <Typography style={{ fontWeight: "bold" }}> Accounts </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={1}>
               <IconButton color="primary" aria-label="Add new account">
-                <Add onClick={() => navigate("/register-form")} />
+                <Add style={{ fontWeight: "bold" }} onClick={() => navigate("/register-form")}  />
               </IconButton>
             </Grid>
           </Grid>
@@ -103,18 +97,18 @@ export const CredentialsList = () => {
           {list.map((value) => (
             <ListItem
               key={value}
-              disableGutters
-              secondaryAction={
-                <IconButton aria-label="comment">
-                  <ArrowForward
+              button
+              divider
+            
+            
                     onClick={() => {
                       navigate("/get-credential-data", {
                         state: { credential: value },
                       });
                     }}
-                  />
-                </IconButton>
-              }
+                  
+              
+              
             >
               <ListItemText
                 sx={{ maxWidth: 30 }}
@@ -122,9 +116,10 @@ export const CredentialsList = () => {
                 secondary={`${value.username.substr(0, 18)}`}
               />
             </ListItem>
+           
           ))}
         </List>
       )}
-    </div>
+    </Stack>
   );
 };

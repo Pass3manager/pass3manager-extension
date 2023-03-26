@@ -1,98 +1,76 @@
 import * as React from "react";
-import { Button, Typography } from "@mui/material";
+import { Button, Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from "@mui/material";
 import { Navbar } from "../components/Navbar";
 import { useNavigate } from "react-router";
 
 export const SelectNetwork = () => {
   const navigate = useNavigate();
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "350px",
-        height: "500px",
-      }}
+    <Stack
+    spacing={2} height={500} width={350}
     >
       <Navbar />
-      <Typography style={{ textAlign: "center" }}>
-        Selecciona la red donde se almacenarán tus credenciales
+      <Typography fontWeight={"bold"}>
+      Select the network where your credentials will be stored
       </Typography>
 
-      <div
-        style={{
+
+
+<Card sx={{ maxWidth: 340}}>
+      <CardActionArea onClick={() => {
+            navigate("/credential-list");
+          }}>
+            <div style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          margin: "20px 0",
-        }}
-      >
-        <Button
-          onClick={() => {
-            navigate("/credential-list");
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <img
+          alignItems: "center"
+        
+        }}>
+
+             <img
               src="../img/polybase.png"
               alt="Polybase"
-              style={{ height: "40px" }}
+              style={{ height: "40px"}}
             />
-          </div>
-        </Button>
-        <Typography style={{ textAlign: "center" }}>
+            </div>
+        <CardContent>
+         
+          <Typography variant="body1" color="text.primary">
           Decentralized database for self sovereign data
-        </Typography>
-      </div>
 
-      <div
-        style={{
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+<Card sx={{ maxWidth: 340}}>
+      <CardActionArea onClick={() => {
+            navigate("/credential-list");
+          }}>
+            <div style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          margin: "20px 0",
-        }}
-      >
-        <Button
-          onClick={() => {
-            navigate("/credential-list");
-          }}
-        >
-          <img
-            src="../img/gnosis.png"
-            alt="Polybase"
-            style={{ height: "40px" }}
-          />
-        </Button>
-        <Typography style={{ textAlign: "center" }}>
-          Self sovereign data through smart contracts on-chain, aplly gas-fees
-        </Typography>
-      </div>
+          alignItems: "center"
+        
+        }}>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          margin: "20px 0",
-        }}
-      >
-        <Button
-          onClick={() => {
-            navigate("/credential-list");
-          }}
-        >
-          <img
-            src="../img/scroll.png"
-            alt="Polybase"
-            style={{ height: "40px" }}
-          />
-        </Button>
-        <Typography style={{ textAlign: "center" }}>
+             <img
+              src="../img/gnosis.png"
+              alt="Gnosis"
+              style={{ height: "40px"}}
+            />
+            </div>
+        <CardContent>
+         
+          <Typography variant="body1" color="text.primary">
           Self sovereign data through smart contracts on-chain, aplly gas-fees
-        </Typography>
-      </div>
-    </div>
+
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+
+
+    
+    </Stack>
   );
 };

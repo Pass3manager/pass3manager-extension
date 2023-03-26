@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Pass3Manager",
+  "name": "Web3pass",
   "version": "1.0.0",
   "icons": {
     "16": "icon.png",
