@@ -51,7 +51,7 @@ export const Sign = () => {
           <Typography
             variant="body1"
           >
-            Want to know more about Pass3manager,<a href="https://www.bonfire.xyz/web3pass" target="_blank">click here</a>
+            Want to know more about Web3Pass,<a href="https://www.bonfire.xyz/web3pass" target="_blank">click here</a>
        
           </Typography>
           

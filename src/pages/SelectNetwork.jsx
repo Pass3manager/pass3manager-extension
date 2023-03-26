@@ -44,7 +44,7 @@ export const SelectNetwork = () => {
     </Card>
 <Card sx={{ maxWidth: 340}}>
       <CardActionArea onClick={() => {
-            navigate("/credential-list");
+            navigate("/under-construction");
           }}>
             <div style={{
           display: "flex",

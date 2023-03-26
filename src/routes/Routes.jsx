@@ -3,6 +3,7 @@ import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { CredentialsList } from "../pages/CredentialsList";
 import { RegisterForm } from "../pages/RegisterForm";
 import { Credential } from "../pages/Credential";
+import { PageConstruction } from "../pages/PageConstruction";
 import { SelectNetwork } from "../pages/SelectNetwork";
 import { Settings } from "../pages/Settings";
 import { Sign } from "../pages/Sign";
@@ -32,6 +33,10 @@ export const Routes = () => {
     {
       path: "/get-credential-data",
       element: <Credential />,
+    },
+    {
+      path: "/under-construction",
+      element: <PageConstruction />,
     },
   ]);
 
