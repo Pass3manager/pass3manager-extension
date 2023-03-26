@@ -13,7 +13,7 @@ To get started with the project, follow these steps:
 3. Build the project using `npm run build`.
 4. Open Google Chrome browser and go to `chrome://extensions`.
 5. Enable developer mode by toggling the switch in the top right corner.
-6. Click on the "Load unpacked" button and select the `build` folder of the project.
+6. Click on the "Load unpacked" button and select the `dist` folder of the project.
 7. Web3Pass extension should now be installed and ready to use.
 
 Note: To use Metamask for encryption, authentication, and decryption, you will need to have it installed in your browser.
