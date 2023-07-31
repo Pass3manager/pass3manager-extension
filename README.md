@@ -37,3 +37,6 @@ The Password Manager Chrome extension project was built using the following tech
 - Polybase.xyz
 - Material UI
 
+## Demo
+
+Check out our demo here:  https://youtu.be/R7vdRG52uLc
